@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Para Você</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: radial-gradient(circle at top, #1a1a2e, #0f0c29 70%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px 18px 40px;
+      text-align: center;
+      animation: fadeIn 1.8s ease;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      opacity: 0.85;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    }
+
+    .btn {
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.4s ease;
+    }
+
+    .btn:hover { background: rgba(255,255,255,0.25); }
+
+    .message {
+      margin-top: 26px;
+      font-size: 17px;
+      line-height: 1.7;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 1.5s ease, max-height 1.5s ease;
+    }
+
+    .message.show { opacity: 1; max-height: 300px; }
+
+    .audio-hint {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: rgba(255, 90, 140, 0.7);
+      font-size: 16px;
+      animation: floatUp 7s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    audio { display: none; }
+
+    .side-text {
+      position: fixed;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 14px;
+      letter-spacing: 2px;
+      opacity: 0.35;
+      font-family: 'Georgia', serif;
+      pointer-events: none;
+    }
+
+    .side-text-right {
+      position: fixed;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-size: 14px;
+      letter-spacing: 2px;
+      opacity: 0.35;
+      font-family: 'Georgia', serif;
+      pointer-events: none;
+    }
+
+    .footer-text {
+      position: fixed;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.35;
+      letter-spacing: 1px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="side-text">talvez dê certo</div>
+  <div class="side-text-right">fala cmg bb</div>
+  <div class="container">
+    <h1>B + J = amor maluco</h1>
+
+    <div class="gallery">
+      <img src="foto1.jpg" />
+      <img src="foto2.jpg" />
+      <img src="foto3.jpg" />
+      <img src="foto4.jpg" />
+    </div>
+
+    <button class="btn" onclick="showMessage()">Toque aqui</button>
+
+    <div class="message" id="message">
+      saudades bb
+    </div>
+
+    <div class="audio-hint">(ative o som)</div>
+
+    <audio id="bgm" loop>
+      <source src="alucinado.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="footer-text">nem precisa responder, mas te amo bb</div>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message').classList.add('show');
+      document.getElementById('bgm').play();
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 4) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 650);
+  </script>
+</body>
+</html>
